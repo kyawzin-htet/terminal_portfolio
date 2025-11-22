@@ -4,12 +4,16 @@ import React, { useState, useRef, useEffect } from "react";
 
 interface CommandInputProps {
     onCommand: (command: string) => void;
+    onClear: () => void;
     prompt?: string;
+    availableCommands: string[];
 }
 
 export const CommandInput: React.FC<CommandInputProps> = ({
     onCommand,
+    onClear,
     prompt = "visitor@kyawzinhtet-portfolio:~$",
+    availableCommands,
 }) => {
     const [input, setInput] = useState("");
     const [historyIndex, setHistoryIndex] = useState(-1);
@@ -46,6 +50,26 @@ export const CommandInput: React.FC<CommandInputProps> = ({
                     setInput(commandHistory[newIndex]);
                 }
             }
+        } else if (e.key === "Tab" || (e.ctrlKey && e.key === "i")) {
+            e.preventDefault();
+            if (!input.trim()) return;
+
+            const matches = availableCommands.filter(cmd => cmd.startsWith(input.toLowerCase()));
+
+            if (matches.length > 0) {
+                // If current input is already a match, cycle to the next one
+                const currentIndex = matches.indexOf(input);
+                if (currentIndex !== -1) {
+                    const nextIndex = (currentIndex + 1) % matches.length;
+                    setInput(matches[nextIndex]);
+                } else {
+                    // Otherwise, pick the first match
+                    setInput(matches[0]);
+                }
+            }
+        } else if (e.ctrlKey && e.key === "l") {
+            e.preventDefault();
+            onClear();
         }
     };
 

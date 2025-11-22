@@ -58,7 +58,7 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
                 y: isMaximized ? 0 : undefined,
             }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className={`dark:bg-black/90 bg-white/90 border dark:border-green-900 border-gray-300 shadow-2xl overflow-hidden flex flex-col font-mono ${isMaximized ? "fixed inset-0 z-50" : "relative mx-auto"
+            className={`dark:bg-black/90 bg-white border dark:border-green-900 border-gray-300 shadow-2xl overflow-hidden flex flex-col font-mono ${isMaximized ? "fixed inset-0 z-50" : "relative mx-auto"
                 }`}
             style={{
                 // Ensure it doesn't go off-screen easily when not maximized

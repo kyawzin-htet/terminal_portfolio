@@ -37,110 +37,127 @@ export const Terminal = () => {
         ]);
     }, []);
 
+    const projectsList = [
+        { name: "KyawZinHtet Portfolio", description: "You are looking at it!", url: "#" },
+        { name: "E-commerce Dashboard", description: "A modern dashboard for online stores.", url: "#" },
+        { name: "Task Manager API", description: "RESTful API built with Node.js and Express.", url: "#" },
+    ];
+
     const handleCommand = (cmd: string) => {
         const trimmedCmd = cmd.trim().toLowerCase();
         const id = Date.now().toString();
         let output: React.ReactNode = "";
 
-        switch (trimmedCmd) {
-            case "help":
-                output = (
-                    <div className="grid grid-cols-1 gap-2">
-                        <p className="text-yellow-500"><Typewriter text="Available commands:" /></p>
-                        <div className="grid grid-cols-[100px_1fr] gap-4">
-                            <span>about</span>
-                            <span><Typewriter text="Who am I?" /></span>
-                            <span>projects</span>
-                            <span><Typewriter text="View my work" /></span>
-                            <span>contact</span>
-                            <span><Typewriter text="Get in touch" /></span>
-                            <span>theme</span>
-                            <span><Typewriter text="Toggle light/dark theme" /></span>
-                            <span>clear</span>
-                            <span><Typewriter text="Clear terminal history" /></span>
-                            <span>maximize</span>
-                            <span><Typewriter text="Maximize terminal window" /></span>
-                            <span>minimize</span>
-                            <span><Typewriter text="Minimize terminal window" /></span>
-                            <span>help</span>
-                            <span><Typewriter text="Show this help message" /></span>
+        if (trimmedCmd.startsWith("go ")) {
+            const projectNumber = parseInt(trimmedCmd.split(" ")[1]);
+            if (!isNaN(projectNumber) && projectNumber > 0 && projectNumber <= projectsList.length) {
+                const project = projectsList[projectNumber - 1];
+                window.open(project.url, "_blank");
+                output = <Typewriter text={`Opening ${project.name}...`} />;
+            } else {
+                output = <span className="text-red-500"><Typewriter text={`Project number ${projectNumber} not found. Type 'projects' to see the list.`} /></span>;
+            }
+        } else {
+            switch (trimmedCmd) {
+                case "help":
+                    output = (
+                        <div className="grid grid-cols-1 gap-2">
+                            <p className="text-yellow-500"><Typewriter text="Available commands:" /></p>
+                            <div className="grid grid-cols-[100px_1fr] gap-4">
+                                <span>about</span>
+                                <span><Typewriter text="Who am I?" /></span>
+                                <span>projects</span>
+                                <span><Typewriter text="View my work" /></span>
+                                <span>contact</span>
+                                <span><Typewriter text="Get in touch" /></span>
+                                <span>theme</span>
+                                <span><Typewriter text="Toggle light/dark theme" /></span>
+                                <span>clear</span>
+                                <span><Typewriter text="Clear terminal history" /></span>
+                                <span>maximize</span>
+                                <span><Typewriter text="Maximize terminal window" /></span>
+                                <span>minimize</span>
+                                <span><Typewriter text="Minimize terminal window" /></span>
+                                <span>help</span>
+                                <span><Typewriter text="Show this help message" /></span>
+                                <span>go &lt;num&gt;</span>
+                                <span><Typewriter text="Go to project number" /></span>
+                            </div>
                         </div>
-                    </div>
-                );
-                break;
-            case "about":
-                output = (
-                    <div>
-                        <p className="mb-2"><Typewriter text="Hi, I'm a Full Stack Developer passionate about building minimalist and functional web applications." /></p>
-                        <p><Typewriter text="I love working with React, Next.js, Node.js, and modern web technologies." /></p>
-                    </div>
-                );
-                break;
-            case "projects":
-                output = (
-                    <div className="flex flex-col gap-2">
-                        <p className="text-yellow-500"><Typewriter text="My Projects:" /></p>
-                        <ul className="list-disc list-inside">
-                            <li>
-                                <a href="#" className="underline hover:text-green-300">KyawZinHtet Portfolio</a> - <Typewriter text="You are looking at it!" />
-                            </li>
-                            <li>
-                                <a href="#" className="underline hover:text-green-300">E-commerce Dashboard</a> - <Typewriter text="A modern dashboard for online stores." />
-                            </li>
-                            <li>
-                                <a href="#" className="underline hover:text-green-300">Task Manager API</a> - <Typewriter text="RESTful API built with Node.js and Express." />
-                            </li>
-                        </ul>
-                    </div>
-                );
-                break;
-            case "contact":
-                output = (
-                    <div className="flex flex-col gap-2">
-                        <p className="text-yellow-500"><Typewriter text="Contact Me:" /></p>
-                        <div className="grid grid-cols-[100px_1fr] gap-2">
-                            <span>Email:</span>
-                            <a href="mailto:hello@example.com" className="underline hover:text-green-300">hello@example.com</a>
-                            <span>GitHub:</span>
-                            <a href="https://github.com/example" target="_blank" rel="noopener noreferrer" className="underline hover:text-green-300">github.com/example</a>
-                            <span>LinkedIn:</span>
-                            <a href="https://linkedin.com/in/example" target="_blank" rel="noopener noreferrer" className="underline hover:text-green-300">linkedin.com/in/example</a>
+                    );
+                    break;
+                case "about":
+                    output = (
+                        <div>
+                            <p className="mb-2"><Typewriter text="Hi, I'm a Full Stack Developer passionate about building minimalist and functional web applications." /></p>
+                            <p><Typewriter text="I love working with React, Next.js, Node.js, and modern web technologies." /></p>
                         </div>
-                    </div>
-                );
-                break;
-            case "theme":
-                const newTheme = theme === "dark" ? "light" : "dark";
-                setTheme(newTheme);
-                output = <Typewriter text={`Theme switched to ${newTheme} mode.`} />;
-                break;
-            case "clear":
-                setHistory([]);
-                return;
-            case "maximize":
-            case "expand":
-                setIsMaximized(true);
-                setIsMinimized(false);
-                output = <Typewriter text="Window maximized." />;
-                break;
-            case "minimize":
-                setIsMinimized(true);
-                setIsMaximized(false);
-                output = <Typewriter text="Window minimized." />;
-                break;
-            case "restore":
-                setIsMaximized(false);
-                setIsMinimized(false);
-                output = <Typewriter text="Window restored." />;
-                break;
-            default:
-                output = (
-                    <span>
-                        <Typewriter text={`Command not found: ${trimmedCmd}. Type `} />
-                        <span className="text-yellow-500">help</span>
-                        <Typewriter text=" for a list of commands." />
-                    </span>
-                );
+                    );
+                    break;
+                case "projects":
+                    output = (
+                        <div className="flex flex-col gap-2">
+                            <p className="text-yellow-500"><Typewriter text="My Projects:" /></p>
+                            <ul className="list-none">
+                                {projectsList.map((project, index) => (
+                                    <li key={index} className="mb-1">
+                                        <span className="mr-2">{index + 1}.</span>
+                                        <span className="font-bold">{project.name}</span> - <Typewriter text={project.description} />
+                                    </li>
+                                ))}
+                            </ul>
+                            <p className="text-gray-400 mt-2"><Typewriter text="Type 'go <project_number>' to view a project." /></p>
+                        </div>
+                    );
+                    break;
+                case "contact":
+                    output = (
+                        <div className="flex flex-col gap-2">
+                            <p className="text-yellow-500"><Typewriter text="Contact Me:" /></p>
+                            <div className="grid grid-cols-[100px_1fr] gap-2">
+                                <span>Email:</span>
+                                <a href="mailto:hello@example.com" className="underline hover:text-green-300">hello@example.com</a>
+                                <span>GitHub:</span>
+                                <a href="https://github.com/example" target="_blank" rel="noopener noreferrer" className="underline hover:text-green-300">github.com/example</a>
+                                <span>LinkedIn:</span>
+                                <a href="https://linkedin.com/in/example" target="_blank" rel="noopener noreferrer" className="underline hover:text-green-300">linkedin.com/in/example</a>
+                            </div>
+                        </div>
+                    );
+                    break;
+                case "theme":
+                    const newTheme = theme === "dark" ? "light" : "dark";
+                    setTheme(newTheme);
+                    output = <Typewriter text={`Theme switched to ${newTheme} mode.`} />;
+                    break;
+                case "clear":
+                    setHistory([]);
+                    return;
+                case "maximize":
+                case "expand":
+                    setIsMaximized(true);
+                    setIsMinimized(false);
+                    output = <Typewriter text="Window maximized." />;
+                    break;
+                case "minimize":
+                    setIsMinimized(true);
+                    setIsMaximized(false);
+                    output = <Typewriter text="Window minimized." />;
+                    break;
+                case "restore":
+                    setIsMaximized(false);
+                    setIsMinimized(false);
+                    output = <Typewriter text="Window restored." />;
+                    break;
+                default:
+                    output = (
+                        <span>
+                            <Typewriter text={`Command not found: ${trimmedCmd}. Type `} />
+                            <span className="text-yellow-500">help</span>
+                            <Typewriter text=" for a list of commands." />
+                        </span>
+                    );
+            }
         }
 
         setHistory((prev) => [...prev, { id, command: cmd, output }]);
@@ -163,7 +180,14 @@ export const Terminal = () => {
             isDark={theme === "dark"}
         >
             <OutputDisplay history={history} />
-            <CommandInput onCommand={handleCommand} />
+            <CommandInput
+                onCommand={handleCommand}
+                onClear={() => setHistory([])}
+                availableCommands={[
+                    "help", "about", "projects", "contact", "theme",
+                    "clear", "maximize", "minimize", "go"
+                ]}
+            />
         </TerminalWindow>
     );
 };
