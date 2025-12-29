@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { type TerminalTheme } from "@/config/themes";
 
 interface CommandInputProps {
     onCommand: (command: string) => void;
     onClear: () => void;
     prompt?: string;
     availableCommands: string[];
+    theme: TerminalTheme;
 }
 
 export const CommandInput: React.FC<CommandInputProps> = ({
@@ -14,6 +16,7 @@ export const CommandInput: React.FC<CommandInputProps> = ({
     onClear,
     prompt = "visitor@kyawzinhtet-portfolio:~$",
     availableCommands,
+    theme,
 }) => {
     const [input, setInput] = useState("");
     const [historyIndex, setHistoryIndex] = useState(-1);
@@ -82,7 +85,7 @@ export const CommandInput: React.FC<CommandInputProps> = ({
 
     return (
         <form onSubmit={handleSubmit} className="flex items-center w-full">
-            <span className="dark:text-green-500 text-gray-700 mr-2 whitespace-nowrap">{prompt}</span>
+            <span className="mr-2 whitespace-nowrap" style={{ color: theme.colors.prompt }}>{prompt}</span>
             <div className="relative flex-1">
                 <input
                     ref={inputRef}
@@ -90,7 +93,8 @@ export const CommandInput: React.FC<CommandInputProps> = ({
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="w-full bg-transparent border-none outline-none dark:text-green-400 text-black font-mono caret-transparent"
+                    className="w-full bg-transparent border-none outline-none font-mono caret-transparent"
+                    style={{ color: theme.colors.output }}
                     autoFocus
                     autoComplete="off"
                     spellCheck="false"

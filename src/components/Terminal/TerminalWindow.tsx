@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { Maximize2, Minus, X, Minimize2, Moon, Sun } from "lucide-react";
 import { motion, useDragControls } from "framer-motion";
+import { type TerminalTheme, type ThemeName, getAllThemeNames } from "@/config/themes";
 
 interface TerminalWindowProps {
     children: React.ReactNode;
@@ -11,8 +12,8 @@ interface TerminalWindowProps {
     setIsMaximized: (value: boolean) => void;
     isMinimized: boolean;
     setIsMinimized: (value: boolean) => void;
-    onToggleTheme: () => void;
-    isDark: boolean;
+    theme: TerminalTheme;
+    onThemeChange: (themeName: ThemeName) => void;
 }
 
 export const TerminalWindow: React.FC<TerminalWindowProps> = ({
@@ -22,8 +23,8 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
     setIsMaximized,
     isMinimized,
     setIsMinimized,
-    onToggleTheme,
-    isDark,
+    theme,
+    onThemeChange,
 }) => {
     const dragControls = useDragControls();
     const containerRef = useRef<HTMLDivElement>(null);
@@ -58,11 +59,12 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
                 y: isMaximized ? 0 : undefined,
             }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className={`dark:bg-black/90 bg-white border dark:border-green-900 border-gray-300 shadow-2xl overflow-hidden flex flex-col font-mono ${isMaximized ? "fixed inset-0 z-50" : "relative mx-auto"
+            className={`overflow-hidden flex flex-col font-mono ${isMaximized ? "fixed inset-0 z-50" : "relative mx-auto"
                 }`}
             style={{
-                // Ensure it doesn't go off-screen easily when not maximized
                 position: isMaximized ? "fixed" : "relative",
+                backgroundColor: theme.colors.background,
+                borderColor: theme.colors.border,
             }}
         >
             {/* Title Bar */}
@@ -70,8 +72,13 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
                 onPointerDown={(e) => {
                     if (!isMaximized) dragControls.start(e);
                 }}
-                className={`dark:bg-gray-900 bg-gray-100 px-4 py-2 flex items-center justify-between border-b dark:border-green-900 border-gray-300 select-none ${!isMaximized ? "cursor-grab active:cursor-grabbing" : ""
-                    }`}            >
+                className={`px-4 py-2 flex items-center justify-between border-b select-none ${!isMaximized ? "cursor-grab active:cursor-grabbing" : ""
+                    }`}
+                style={{
+                    backgroundColor: theme.colors.titleBar,
+                    borderColor: theme.colors.border,
+                }}
+            >
                 <div className="flex items-center gap-2 group">
                     <button
                         onClick={() => window.location.reload()} // Close = Refresh for now
@@ -96,21 +103,32 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
                         )}
                     </button>
                 </div>
-                <div className="text-green-700 text-sm">{title}</div>
+                <div className="text-sm" style={{ color: theme.colors.titleText }}>{title}</div>
                 <div className="flex items-center gap-2 opacity-50">
                     <button
-                        onClick={onToggleTheme}
-                        className="hover:text-green-400 transition-colors"
-                        title="Toggle Theme"
+                        onClick={() => {
+                            const allThemes = getAllThemeNames();
+                            const currentIndex = allThemes.indexOf(theme.name);
+                            const nextIndex = (currentIndex + 1) % allThemes.length;
+                            onThemeChange(allThemes[nextIndex]);
+                        }}
+                        className="transition-colors"
+                        style={{ color: theme.colors.titleText }}
+                        title="Cycle Theme"
                     >
-                        {isDark ? <Sun size={14} /> : <Moon size={14} />}
+                        <Sun size={14} />
                     </button>
                 </div>
             </div>
 
             {/* Content Area */}
             {!isMinimized && (
-                <div className="flex-1 p-4 overflow-y-auto scrollbar-thin dark:scrollbar-thumb-green-900 scrollbar-thumb-gray-400 dark:scrollbar-track-black scrollbar-track-gray-100">
+                <div
+                    className="flex-1 p-4 overflow-y-auto scrollbar-thin"
+                    style={{
+                        scrollbarColor: `${theme.colors.scrollbarThumb} ${theme.colors.scrollbarTrack}`,
+                    }}
+                >
                     {children}
                 </div>
             )}
