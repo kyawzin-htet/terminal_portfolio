@@ -8,7 +8,8 @@ export type ThemeName =
     | 'dracula'
     | 'monokai'
     | 'nord'
-    | 'solarized-dark';
+    | 'solarized-dark'
+    | 'glass';
 
 export interface TerminalTheme {
     name: ThemeName;
@@ -197,6 +198,23 @@ export const themes: Record<ThemeName, TerminalTheme> = {
             accent: '#268bd2',
             scrollbarThumb: '#586e75',
             scrollbarTrack: '#002b36',
+        },
+    },
+    'glass': {
+        name: 'glass',
+        displayName: 'VisionOS Glass',
+        colors: {
+            background: 'rgba(0, 0, 0, 0.3)', // Darker, more transparent feel
+            foreground: '#ffffff',
+            border: 'rgba(255, 255, 255, 0.15)', // 15% white opacity
+            titleBar: 'transparent',
+            titleText: 'rgba(255, 255, 255, 0.9)',
+            prompt: '#3b82f6', // SF Blue
+            command: '#ffffff',
+            output: 'rgba(255, 255, 255, 0.85)',
+            accent: '#3b82f6',
+            scrollbarThumb: 'rgba(255, 255, 255, 0.2)',
+            scrollbarTrack: 'transparent',
         },
     },
 };

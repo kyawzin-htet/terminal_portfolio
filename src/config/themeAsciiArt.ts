@@ -58,6 +58,12 @@ export const themeAsciiArt: Record<ThemeName, string> = {
 ║   🌅 SOLARIZED DARK ACTIVE    ║
 ║    Precision Colors           ║
 ╚═══════════════════════════════╝`,
+
+    'glass': `
+╔═══════════════════════════════╗
+║   🧊 GLASS UI ACTIVATED       ║
+║    Crystal Clear Vision       ║
+╚═══════════════════════════════╝`,
 };
 
 export const getThemeAsciiArt = (themeName: ThemeName): string => {

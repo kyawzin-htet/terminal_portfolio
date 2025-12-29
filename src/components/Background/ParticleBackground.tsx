@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { useTerminalTheme } from "@/context/TerminalThemeContext";
 
 interface Particle {
     x: number;
@@ -10,8 +11,19 @@ interface Particle {
     size: number;
 }
 
+// Helper to convert hex to rgb
+const hexToRgb = (hex: string) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+};
+
 export const ParticleBackground = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const { theme } = useTerminalTheme();
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -27,6 +39,8 @@ export const ParticleBackground = () => {
         const mouseDistance = 200;
 
         let mouse = { x: 0, y: 0 };
+
+        const rgb = hexToRgb(theme.colors.accent) || { r: 74, g: 222, b: 128 }; // Default to green if fail
 
         const resize = () => {
             canvas.width = window.innerWidth;
@@ -82,7 +96,7 @@ export const ParticleBackground = () => {
 
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = "rgba(74, 222, 128, 0.5)"; // Greenish for matrix vibe
+                ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.5)`; // Use new theme color
                 ctx.fill();
             });
 
@@ -97,7 +111,7 @@ export const ParticleBackground = () => {
 
                     if (dist < connectionDistance) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(74, 222, 128, ${0.2 * (1 - dist / connectionDistance)})`;
+                        ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${0.2 * (1 - dist / connectionDistance)})`;
                         ctx.lineWidth = 1;
                         ctx.moveTo(p1.x, p1.y);
                         ctx.lineTo(p2.x, p2.y);
@@ -111,7 +125,7 @@ export const ParticleBackground = () => {
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < mouseDistance) {
                     ctx.beginPath();
-                    ctx.strokeStyle = `rgba(74, 222, 128, ${0.3 * (1 - dist / mouseDistance)})`;
+                    ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${0.3 * (1 - dist / mouseDistance)})`;
                     ctx.lineWidth = 1;
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(mouse.x, mouse.y);
@@ -138,7 +152,7 @@ export const ParticleBackground = () => {
             window.removeEventListener("mousemove", handleMouseMove);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [theme]); // Re-run effect when theme changes
 
     return (
         <canvas

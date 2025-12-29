@@ -6,9 +6,12 @@ import { CommandInput } from "./CommandInput";
 import { OutputDisplay } from "./OutputDisplay";
 import { Typewriter } from "./Typewriter";
 import { MultiLineTypewriter } from "./MultiLineTypewriter";
-import { getTheme, getAllThemeNames, type ThemeName, type TerminalTheme } from "@/config/themes";
+import { getAllThemeNames, getTheme, type ThemeName } from "@/config/themes";
+import { useTerminalTheme } from "@/context/TerminalThemeContext";
 import { getThemeAsciiArt } from "@/config/themeAsciiArt";
 import { SUCCESS_ASCII, FAILURE_ASCII } from "@/config/statusAsciiArt";
+import { ExperienceDisplay } from "./ExperienceDisplay";
+import { experienceData } from "@/data/experience";
 
 type CommandHistory = {
     id: string;
@@ -17,9 +20,8 @@ type CommandHistory = {
 };
 
 export const Terminal = () => {
+    const { theme: currentTheme, currentThemeName, setTheme: setCurrentThemeName } = useTerminalTheme();
     const [history, setHistory] = useState<CommandHistory[]>([]);
-    const [currentThemeName, setCurrentThemeName] = useState<ThemeName>('dark');
-    const [currentTheme, setCurrentTheme] = useState<TerminalTheme>(getTheme('dark'));
     const [mounted, setMounted] = useState(false);
     const [isMaximized, setIsMaximized] = useState(false);
     const [isMinimized, setIsMinimized] = useState(false);
@@ -57,14 +59,9 @@ export const Terminal = () => {
 
         // Load saved state from localStorage
         try {
-            const savedTheme = localStorage.getItem('terminal-theme');
             const savedHistory = localStorage.getItem('terminal-history');
 
-            if (savedTheme) {
-                const themeName = savedTheme as ThemeName;
-                setCurrentThemeName(themeName);
-                setCurrentTheme(getTheme(themeName));
-            }
+            // Theme is now handled by context, no need to load here
 
             if (savedHistory) {
                 // Parse saved history but we can't restore React components
@@ -107,12 +104,7 @@ export const Terminal = () => {
         ]);
     }, []);
 
-    // Save theme to localStorage
-    useEffect(() => {
-        if (mounted) {
-            localStorage.setItem("terminal-theme", currentThemeName);
-        }
-    }, [mounted, currentThemeName]);
+    // Theme saving is now handled by context
 
     // Save history to localStorage
     useEffect(() => {
@@ -233,7 +225,6 @@ export const Terminal = () => {
                 if (allThemes.includes(themeArg)) {
                     const newTheme = getTheme(themeArg);
                     setCurrentThemeName(themeArg);
-                    setCurrentTheme(newTheme);
                     const asciiArt = getThemeAsciiArt(themeArg);
                     output = (
                         <div>
@@ -300,6 +291,8 @@ export const Terminal = () => {
                                 <span><Typewriter text="Show this help message" /></span>
                                 <span>go &lt;num&gt;</span>
                                 <span><Typewriter text="Go to project number" /></span>
+                                <span>exp</span>
+                                <span><Typewriter text="View work experience" /></span>
                             </div>
                         </div>
                     );
@@ -361,14 +354,29 @@ export const Terminal = () => {
                     output = <Typewriter text="Window maximized." />;
                     break;
                 case "minimize":
-                    setIsMinimized(true);
-                    setIsMaximized(false);
-                    output = <Typewriter text="Window minimized." />;
+                    if (isMaximized) {
+                        setIsMaximized(false);
+                        output = <Typewriter text="Window restored to normal size." />;
+                    } else {
+                        setIsMinimized(true);
+                        setIsMaximized(false);
+                        output = <Typewriter text="Window minimized." />;
+                    }
                     break;
                 case "restore":
+                case "unmaximize":
                     setIsMaximized(false);
                     setIsMinimized(false);
                     output = <Typewriter text="Window restored." />;
+                    break;
+                case "exp":
+                case "experience":
+                    output = (
+                        <ExperienceDisplay
+                            data={experienceData}
+                            theme={currentTheme}
+                        />
+                    );
                     break;
                 default:
                     output = (
@@ -397,9 +405,7 @@ export const Terminal = () => {
     if (inputMode === 'message') currentPrompt = "Ask anything: ";
 
     const handleThemeChange = (themeName: ThemeName) => {
-        const newTheme = getTheme(themeName);
         setCurrentThemeName(themeName);
-        setCurrentTheme(newTheme);
     };
 
     if (!mounted) return null;
@@ -423,7 +429,7 @@ export const Terminal = () => {
                 onCommand={handleCommand}
                 onClear={() => setHistory([])}
                 availableCommands={[
-                    "help", "about", "projects", "contact", "theme",
+                    "help", "about", "projects", "contact", "theme", "exp", "experience",
                     "clear", "maximize", "minimize", "restore", "go",
                     // Add all theme commands for autocomplete
                     ...getAllThemeNames().map(name => `theme ${name}`)

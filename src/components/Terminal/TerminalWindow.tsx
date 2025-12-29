@@ -59,12 +59,19 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
                 y: isMaximized ? 0 : undefined,
             }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className={`overflow-hidden flex flex-col font-mono ${isMaximized ? "fixed inset-0 z-50" : "relative mx-auto"
-                }`}
+            dragElastic={0}
+            className={`overflow-hidden flex flex-col font-mono transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300
+                ${isMaximized ? "fixed inset-0 z-50 rounded-none transform-none" : "relative mx-auto"}
+                ${theme.name === 'glass'
+                    ? "backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] border border-white/20 hover:backdrop-blur-3xl hover:border-white/30 hover:shadow-[0_8px_40px_0_rgba(31,38,135,0.45)]"
+                    : "rounded-lg shadow-xl"
+                }
+            `}
             style={{
                 position: isMaximized ? "fixed" : "relative",
                 backgroundColor: theme.colors.background,
-                borderColor: theme.colors.border,
+                borderColor: theme.name === 'glass' ? undefined : theme.colors.border,
+                boxShadow: theme.name === 'glass' ? 'inset 0 0 0 1px rgba(255, 255, 255, 0.1)' : undefined, // Inner glow
             }}
         >
             {/* Title Bar */}
@@ -76,7 +83,8 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
                     }`}
                 style={{
                     backgroundColor: theme.colors.titleBar,
-                    borderColor: theme.colors.border,
+                    borderColor: theme.name === 'glass' ? 'rgba(255,255,255,0.1)' : theme.colors.border,
+                    borderBottomWidth: theme.name === 'glass' ? '0px' : '1px',
                 }}
             >
                 <div className="flex items-center gap-2 group">
