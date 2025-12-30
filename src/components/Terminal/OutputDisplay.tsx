@@ -25,24 +25,32 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ history, theme, pr
     const bottomRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Function to force scroll to the very bottom
-        const scrollToBottom = () => {
-            // Find the scrollable container (parent in TerminalWindow)
+        const checkAndScrollToBottom = () => {
             const scrollContainer = bottomRef.current?.closest('.overflow-y-auto');
-            if (scrollContainer) {
-                scrollContainer.scrollTop = scrollContainer.scrollHeight;
-            } else {
-                // Fallback if container not found via class
-                bottomRef.current?.scrollIntoView({ behavior: "auto", block: "end" });
+            if (!scrollContainer) return;
+
+            // Logic: Check if user is already near the bottom, OR if this is a new command (history length changed)
+            // We can't easily detect "new command" inside this mutation observer callback cleanly without ref tracking
+            // But simpler logic: If close to bottom (within 100px), stick to bottom.
+            const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+            const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+
+            if (isNearBottom) {
+                scrollContainer.scrollTop = scrollHeight;
             }
         };
 
-        // Scroll immediately and after a short delay
-        scrollToBottom();
-        const timer = setTimeout(scrollToBottom, 50);
+        // For history changes (new command added), we generally WANT to scroll to bottom
+        // effectively resetting the view for the new output.
+        // But we should do it only once per history change.
+        const scrollContainer = bottomRef.current?.closest('.overflow-y-auto');
+        if (scrollContainer) {
+            scrollContainer.scrollTop = scrollContainer.scrollHeight;
+        }
 
-        // Also scroll whenever the content height changes (e.g. typing effect)
-        const observer = new MutationObserver(scrollToBottom);
+        // Observer for internal content changes (like typewriter effect)
+        const observer = new MutationObserver(checkAndScrollToBottom);
+
         if (bottomRef.current?.parentElement) {
             observer.observe(bottomRef.current.parentElement, {
                 childList: true,
@@ -52,10 +60,9 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ history, theme, pr
         }
 
         return () => {
-            clearTimeout(timer);
             observer.disconnect();
         };
-    }, [history]);
+    }, [history]); // Re-run when history changes (new command)
 
     return (
         <div className="w-full">

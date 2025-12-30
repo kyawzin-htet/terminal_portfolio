@@ -20,6 +20,19 @@ export const ProjectList: React.FC<ProjectListProps> = ({ data, theme }) => {
         result.push([{ text: "// ACCESSING PROJECT_DIRECTORY.LIST...", className: "text-gray-500 text-xs md:text-sm" }]);
         result.push([{ text: "" }]); // Empty line
 
+        // Professional Summary Preamble
+        result.push([
+            { text: "> SYSTEM STATUS: ", className: "text-green-400 font-bold" },
+            { text: "PROFESSIONAL_TRACK_RECORD_VERIFIED", className: "text-green-400" }
+        ]);
+        result.push([
+            { text: "  Successfully shipped and maintained multiple scalable web", className: "text-gray-400" }
+        ]);
+        result.push([
+            { text: "  applications throughout my career for various companies.", className: "text-gray-400" }
+        ]);
+        result.push([{ text: "" }]); // Empty line
+
         data.forEach((project, index) => {
 
             // Separator

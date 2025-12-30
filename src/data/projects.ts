@@ -10,47 +10,119 @@ export interface ProjectItem {
 export const projectsData: ProjectItem[] = [
     {
         id: "portfolio",
-        name: "KyawZinHtet Portfolio",
+        name: "Terminal Portfolio",
         description: [
             "A terminal-based portfolio website built with Next.js and Tailwind CSS.",
             "Features a fully functional command-line interface.",
             "Implements retro aesthetics with modern performance."
         ],
         technologies: ["Next.js", "React", "TailwindCSS", "Framer Motion", "TypeScript"],
-        url: "#",
-        repo: "https://github.com/kyawzinhtet/terminal-portfolio"
+        url: "https://kyawzinhtet-terminal-portfolio.vercel.app",
+        repo: "https://github.com/kyawzin-htet/terminal_portfolio"
     },
     {
-        id: "ecommerce-dash",
-        name: "E-commerce Dashboard",
+        id: "weather-app",
+        name: "Weather App",
         description: [
-            "A comprehensive admin dashboard for managing online stores.",
-            "Real-time analytics, inventory management, and order processing.",
-            "Designed with a focus on data visualization and usability."
+            "A modern weather application that provides real-time weather information with an interactive map interface.",
+            "Users can search for locations and view detailed weather forecasts with beautiful visualizations."
         ],
-        technologies: ["React", "Redux", "Node.js", "MongoDB", "Chart.js"],
-        url: "#"
+        technologies: [
+            "next.js",
+            "react",
+            "tailwind",
+            "react-leaflet",
+            "axios"
+        ],
+        url: "https://weatherapp-k-next.vercel.app/",
+        repo: "https://github.com/yourusername/weather-app"
     },
     {
-        id: "task-api",
-        name: "Task Manager API",
+        id: "kanban-app",
+        name: "Kanban App",
         description: [
-            "A robust RESTful API for task management applications.",
-            "Supports user authentication, task CRUD operations, and filtering.",
-            "Built with scalability and security in mind."
+            "A kanban board application for flexible task management.",
+            "Users can create, edit, delete tasks, and move them between columns with ease."
         ],
-        technologies: ["Node.js", "Express", "PostgreSQL", "Jest", "Docker"],
-        url: "#"
+        technologies: [
+            "react",
+            "redux",
+            "react-beautiful-dnd",
+            "nodejs",
+            "express",
+            "jsonwebtoken",
+            "mongoose",
+            "cookie-parser",
+            "cors"
+        ],
+        url: "https://mern-stack-kanban.vercel.app"
     },
-    {
-        id: "weather-cli",
-        name: "Weather CLI Tool",
-        description: [
-            "A command-line tool to fetch real-time weather information.",
-            "Written in Go for high performance and portability.",
-            "Supports automatic location detection and forecast caching."
-        ],
-        technologies: ["Go", "Cobra", "OpenWeatherMap API"],
-        url: "#"
-    }
+    // {
+    //     id: "crypto-track",
+    //     name: "Crypto Track",
+    //     description: [
+    //         "A modern cryptocurrency tracking application providing real-time data and analytics.",
+    //         "Users can search for cryptocurrencies and view detailed information with beautiful visualizations."
+    //     ],
+    //     technologies: [
+    //         "react",
+    //         "recharts",
+    //         "tailwind"
+    //     ],
+    //     url: "https://track-app-crypto.netlify.app/"
+    // },
+    // {
+    //     id: "rhyme4u",
+    //     name: "Rhyme4U",
+    //     description: [
+    //         "React music player app integrated with Shazam Core API."
+    //     ],
+    //     technologies: [
+    //         "react",
+    //         "redux",
+    //         "axios",
+    //         "swiper"
+    //     ],
+    //     url: "https://rhyme4u.netlify.app/"
+    // },
+    // {
+    //     id: "auth-app",
+    //     name: "Auth App",
+    //     description: [
+    //         "A modern authentication app with secure user signup, login, and account management.",
+    //         "Features intuitive interface and secure authorization flows."
+    //     ],
+    //     technologies: [
+    //         "react",
+    //         "zustand",
+    //         "tailwind",
+    //         "nodejs",
+    //         "express",
+    //         "jsonwebtoken",
+    //         "mailgen",
+    //         "mongoose",
+    //         "nodemailer"
+    //     ],
+    //     url: "https://mern-authenication.vercel.app/"
+    // },
+    // {
+    //     id: "kmovies",
+    //     name: "Kmovies",
+    //     description: [
+    //         "A movie application offering a wide range of movies and TV shows.",
+    //         "Users can search, save favorites, and view detailed information."
+    //     ],
+    //     technologies: [
+    //         "react",
+    //         "redux",
+    //         "materialui",
+    //         "yup",
+    //         "swiper",
+    //         "nodejs",
+    //         "express",
+    //         "jsonwebtoken",
+    //         "mongoose"
+    //     ],
+    //     url: "https://moviesk.netlify.app/"
+    // }
 ];

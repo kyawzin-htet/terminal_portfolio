@@ -9,63 +9,90 @@ export interface ExperienceItem {
 
 export const experienceData: ExperienceItem[] = [
     {
-        id: "exp5",
-        period: "2024 - Present",
-        role: "Senior Full Stack Engineer",
-        company: "TechNova Solutions",
+        id: "exp-freelance",
+        period: "02/2025 - Present",
+        role: "Senior Frontend Developer",
+        company: "CreativeForgeLabs (Freelance)",
         description: [
-            "Leading the migration of legacy monoliths to microservices using **Node.js** and **Go**.",
-            "Architecting scalable cloud infrastructure on AWS (Lambda, ECS, RDS).",
-            "Mentoring junior developers and establishing code quality standards."
+            "Architected scalable admin platform for **50k+ users** using **Vue 3** & **TypeScript**.",
+            "Designed backend with **Node.js**, **Express** & **MySQL**, syncing real-time data via background jobs.",
+            "Built resilient pipelines with **Socket.IO** for high-frequency, low-latency updates.",
+            "Established smooth **continuous development** workflows for seamless deployment."
         ],
-        technologies: ["Node.js", "Go", "AWS", "Microservices", "Docker"]
+        technologies: ["Vue 3", "Node.js", "Express", "MySQL", "Socket.IO", "CI/CD"]
     },
     {
-        id: "exp4",
-        period: "2022 - 2024",
-        role: "Frontend Developer",
-        company: "Creative Pulse Agency",
+        id: "exp-wer",
+        period: "07/2024 - 01/2025",
+        role: "Full-stack Developer",
+        company: "WeR Co.,LTD",
         description: [
-            "Built interactive 3D web experiences using **Three.js** and **React Fiber**.",
-            "Optimized frontend performance, achieving 98+ Lighthouse scores.",
-            "Collaborated with designers to implement pixel-perfect, responsive UIs."
+            "Developed admin dashboard with **Remix.js**, **Firebase**, & **Stripe**.",
+            "Built cross-platform mobile apps for iOS/Android using **React Native**.",
+            "Designed optimized APIs with **Nest.js** & **PostgreSQL** (Prisma ORM).",
+            "Significantly reduced app crash rates & improved load times."
         ],
-        technologies: ["React", "Three.js", "WebGL", "TypeScript", "Tailwind"]
+        technologies: ["Remix.js", "React Native", "Nest.js", "PostgreSQL", "Firebase"]
     },
     {
-        id: "exp3",
-        period: "2020 - 2022",
-        role: "Software Engineer",
-        company: "FinStream Systems",
+        id: "exp-c3",
+        period: "01/2024 - Present",
+        role: "Full-stack Developer",
+        company: "C3",
         description: [
-            "Developed real-time financial dashboards using **Vue.js** and **WebSockets**.",
-            "Implemented secure authentication flows (OAuth2, JWT) for 50k+ users.",
-            "Reduced API latency by 30% through caching strategies (Redis)."
+            "Built POS & Match Management systems using **MERN Stack**.",
+            "Implemented clean architecture APIs with **TypeScript** & **MongoDB**.",
+            "Set up **CI/CD pipelines** & ensured code quality via unit testing.",
+            "Streamlined transaction workflows, reducing user checkout times."
         ],
-        technologies: ["Vue.js", "WebSockets", "Redis", "OAuth2", "Node.js"]
+        technologies: ["MongoDB", "Express", "React", "Node.js", "Redux", "CI/CD"]
     },
     {
-        id: "exp2",
-        period: "2019 - 2020",
-        role: "Junior Web Developer",
-        company: "StartBlock Inc.",
+        id: "exp-tunyat",
+        period: "06/2023 - 01/2024",
+        role: "Full-stack Developer",
+        company: "Tunyat",
         description: [
-            "Assisted in building MVP features for a fast-paced blockchain startup.",
-            "Maintained and updated company landing pages using JAMstack.",
-            "Integrated third-party APIs (Stripe, SendGrid) for payment and email services."
+            "Designed scalable APIs for Reward Fund Management System.",
+            "Developed frontend features with **React/Redux** & **JWT** auth.",
+            "Mentored juniors & minimized API downtime through better error handling."
         ],
-        technologies: ["JavaScript", "JAMstack", "Stripe API", "Git"]
+        technologies: ["Node.js", "Express", "MongoDB", "React", "Redux"]
     },
     {
-        id: "exp1",
-        period: "2018 - 2019",
-        role: "Intern Developer",
-        company: "CodeCraft Academy",
+        id: "exp-md-mid",
+        period: "01/2022 - 05/2023",
+        role: "Mid-Level Developer",
+        company: "Myanmar Digital It Solution",
         description: [
-            "Supported the development of internal tools using Python and Django.",
-            "Fixed bugs and wrote unit tests to improve system stability.",
-            "Learned agile methodologies and participated in daily stand-ups."
+            "delivered 4+ web apps & 2 mobile apps (**React Native**).",
+            "Led development of distinct mobile app achieving significant downloads.",
+            "Optimized codebase efficiency with reusable components."
         ],
-        technologies: ["Python", "Django", "SQL", "Agile"]
+        technologies: ["React", "React Native", "Node.js", "MongoDB", "Express"]
+    },
+    {
+        id: "exp-md-jun",
+        period: "06/2020 - 12/2021",
+        role: "Junior Developer",
+        company: "Myanmar Digital It Solution",
+        description: [
+            "Assisted in building RESTful APIs with **Node.js** & **Express**.",
+            "Collaborated on **React** frontend modules & database schema design.",
+            "Enhanced app reliability by addressing critical data query bugs."
+        ],
+        technologies: ["Node.js", "Express", "MongoDB", "React"]
+    },
+    {
+        id: "exp-globalwave",
+        period: "12/2019 - 02/2020",
+        role: "Intern",
+        company: "Global Wave Technology",
+        description: [
+            "Developed website using **.NET Core**, **C#**, & **Angular**.",
+            "Designed dynamic pages with **HTML**, **CSS**, & **JQuery**.",
+            "Utilized Angular components for SPA architecture."
+        ],
+        technologies: [".NET Core", "C#", "Angular", "Bootstrap", "SQL"]
     }
 ];

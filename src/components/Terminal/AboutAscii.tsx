@@ -127,12 +127,12 @@ export const AboutAscii = () => {
                             speed={20}
                             delay={2000}
                         />
-                        <TypewriterRichText
+                        {/* <TypewriterRichText
                             text="Specialized in the MERN protocol (MongoDB, Express, React, Node)."
                             highlight={[{ text: "MERN protocol", color: "text-blue-400" }]}
                             speed={20}
                             delay={3500}
-                        />
+                        /> */}
 
                         <motion.div
                             initial={{ opacity: 0 }}
