@@ -13,6 +13,8 @@ import { SUCCESS_ASCII, FAILURE_ASCII } from "@/config/statusAsciiArt";
 import { ExperienceTimeline } from "./ExperienceTimeline";
 import { experienceData } from "@/data/experience";
 import { AboutAscii } from "./AboutAscii";
+import { ProjectList } from "./ProjectList";
+import { projectsData } from "@/data/projects";
 
 type CommandHistory = {
     id: string;
@@ -118,12 +120,6 @@ export const Terminal = () => {
         }
     }, [mounted, history]);
 
-    const projectsList = [
-        { name: "KyawZinHtet Portfolio", description: "You are looking at it!", url: "#" },
-        { name: "E-commerce Dashboard", description: "A modern dashboard for online stores.", url: "#" },
-        { name: "Task Manager API", description: "RESTful API built with Node.js and Express.", url: "#" },
-    ];
-
     const handleCommand = async (cmd: string) => {
         // If simply pressing enter with empty command
         if (!cmd.trim() && inputMode === 'command') return;
@@ -211,10 +207,17 @@ export const Terminal = () => {
 
         if (trimmedCmd.startsWith("go ")) {
             const projectNumber = parseInt(trimmedCmd.split(" ")[1]);
-            if (!isNaN(projectNumber) && projectNumber > 0 && projectNumber <= projectsList.length) {
-                const project = projectsList[projectNumber - 1];
-                window.open(project.url, "_blank");
-                output = <Typewriter text={`Opening ${project.name}...`} />;
+            if (!isNaN(projectNumber) && projectNumber > 0 && projectNumber <= projectsData.length) {
+                const project = projectsData[projectNumber - 1];
+                if (project.url && project.url !== '#') {
+                    window.open(project.url, "_blank");
+                    output = <Typewriter text={`Opening ${project.name}...`} />;
+                } else if (project.repo) {
+                    window.open(project.repo, "_blank");
+                    output = <Typewriter text={`Opening repo for ${project.name}...`} />;
+                } else {
+                    output = <span className="text-yellow-500"><Typewriter text={`Project ${project.name} has no live link.`} /></span>;
+                }
             } else {
                 output = <span className="text-red-500"><Typewriter text={`Project number ${projectNumber} not found. Type 'projects' to see the list.`} /></span>;
             }
@@ -304,18 +307,10 @@ export const Terminal = () => {
                     break;
                 case "projects":
                     output = (
-                        <div className="flex flex-col gap-2">
-                            <p className="text-yellow-500"><Typewriter text="My Projects:" /></p>
-                            <ul className="list-none">
-                                {projectsList.map((project, index) => (
-                                    <li key={index} className="mb-1">
-                                        <span className="mr-2">{index + 1}.</span>
-                                        <span className="font-bold">{project.name}</span> - <Typewriter text={project.description} />
-                                    </li>
-                                ))}
-                            </ul>
-                            <p className="text-gray-400 mt-2"><Typewriter text="Type 'go <project_number>' to view a project." /></p>
-                        </div>
+                        <ProjectList
+                            data={projectsData}
+                            theme={currentTheme}
+                        />
                     );
                     break;
                 case "contact":
