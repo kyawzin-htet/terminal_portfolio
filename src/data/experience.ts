@@ -4,6 +4,7 @@ export interface ExperienceItem {
     role: string;
     company: string;
     description: string[];
+    technologies: string[];
 }
 
 export const experienceData: ExperienceItem[] = [
@@ -16,7 +17,8 @@ export const experienceData: ExperienceItem[] = [
             "Leading the migration of legacy monoliths to microservices using **Node.js** and **Go**.",
             "Architecting scalable cloud infrastructure on AWS (Lambda, ECS, RDS).",
             "Mentoring junior developers and establishing code quality standards."
-        ]
+        ],
+        technologies: ["Node.js", "Go", "AWS", "Microservices", "Docker"]
     },
     {
         id: "exp4",
@@ -27,7 +29,8 @@ export const experienceData: ExperienceItem[] = [
             "Built interactive 3D web experiences using **Three.js** and **React Fiber**.",
             "Optimized frontend performance, achieving 98+ Lighthouse scores.",
             "Collaborated with designers to implement pixel-perfect, responsive UIs."
-        ]
+        ],
+        technologies: ["React", "Three.js", "WebGL", "TypeScript", "Tailwind"]
     },
     {
         id: "exp3",
@@ -38,7 +41,8 @@ export const experienceData: ExperienceItem[] = [
             "Developed real-time financial dashboards using **Vue.js** and **WebSockets**.",
             "Implemented secure authentication flows (OAuth2, JWT) for 50k+ users.",
             "Reduced API latency by 30% through caching strategies (Redis)."
-        ]
+        ],
+        technologies: ["Vue.js", "WebSockets", "Redis", "OAuth2", "Node.js"]
     },
     {
         id: "exp2",
@@ -49,7 +53,8 @@ export const experienceData: ExperienceItem[] = [
             "Assisted in building MVP features for a fast-paced blockchain startup.",
             "Maintained and updated company landing pages using JAMstack.",
             "Integrated third-party APIs (Stripe, SendGrid) for payment and email services."
-        ]
+        ],
+        technologies: ["JavaScript", "JAMstack", "Stripe API", "Git"]
     },
     {
         id: "exp1",
@@ -60,6 +65,7 @@ export const experienceData: ExperienceItem[] = [
             "Supported the development of internal tools using Python and Django.",
             "Fixed bugs and wrote unit tests to improve system stability.",
             "Learned agile methodologies and participated in daily stand-ups."
-        ]
+        ],
+        technologies: ["Python", "Django", "SQL", "Agile"]
     }
 ];

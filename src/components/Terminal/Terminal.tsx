@@ -10,7 +10,7 @@ import { getAllThemeNames, getTheme, type ThemeName } from "@/config/themes";
 import { useTerminalTheme } from "@/context/TerminalThemeContext";
 import { getThemeAsciiArt } from "@/config/themeAsciiArt";
 import { SUCCESS_ASCII, FAILURE_ASCII } from "@/config/statusAsciiArt";
-import { ExperienceDisplay } from "./ExperienceDisplay";
+import { ExperienceTimeline } from "./ExperienceTimeline";
 import { experienceData } from "@/data/experience";
 import { AboutAscii } from "./AboutAscii";
 
@@ -367,7 +367,7 @@ export const Terminal = () => {
                 case "exp":
                 case "experience":
                     output = (
-                        <ExperienceDisplay
+                        <ExperienceTimeline
                             data={experienceData}
                             theme={currentTheme}
                         />
