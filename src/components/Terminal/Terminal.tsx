@@ -12,6 +12,7 @@ import { getThemeAsciiArt } from "@/config/themeAsciiArt";
 import { SUCCESS_ASCII, FAILURE_ASCII } from "@/config/statusAsciiArt";
 import { ExperienceDisplay } from "./ExperienceDisplay";
 import { experienceData } from "@/data/experience";
+import { AboutAscii } from "./AboutAscii";
 
 type CommandHistory = {
     id: string;
@@ -299,17 +300,7 @@ export const Terminal = () => {
                     );
                     break;
                 case "about":
-                    output = (
-                        <MultiLineTypewriter
-                            lines={[
-                                "I'm a passionate full-stack developer with over 4 years of experience navigating the ever-evolving landscape of web development.",
-                                "My journey began with a deep dive into the MERN stack, where I honed my skills in MongoDB, Express.js, React, and Node.js, allowing me to build robust and scalable web applications.",
-                                "But my passion for learning doesn't stop there.",
-                                "I thrive on the challenge of picking up new frameworks and languages, and I'm comfortable working on both the front-end and back-end, as well as venturing into the world of mobile app development.",
-                                "This versatility and adaptability empower me to approach any project with confidence and enthusiasm."
-                            ]}
-                        />
-                    );
+                    output = <AboutAscii />;
                     break;
                 case "projects":
                     output = (
