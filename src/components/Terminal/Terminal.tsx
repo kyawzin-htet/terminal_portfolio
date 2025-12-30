@@ -35,7 +35,7 @@ export const Terminal = () => {
         // Initial check for mobile
         if (window.innerWidth < 768) {
             setIsMaximized(true);
-            setPromptLabel("visitor@kzh-portfolio:~$");
+            setPromptLabel("@kzh-portfolio:~$");
         } else {
             setPromptLabel("visitor@kyawzinhtet-portfolio:~$");
         }
@@ -44,7 +44,7 @@ export const Terminal = () => {
         const handleResize = () => {
             if (window.innerWidth < 768) {
                 setIsMaximized(true);
-                setPromptLabel("visitor@kzh-portfolio:~$");
+                setPromptLabel("@kzh-portfolio:~$");
             } else {
                 setPromptLabel("visitor@kyawzinhtet-portfolio:~$");
             }
@@ -275,6 +275,8 @@ export const Terminal = () => {
                                 <span><Typewriter text="Who am I?" /></span>
                                 <span>projects</span>
                                 <span><Typewriter text="View my work" /></span>
+                                <span>exp</span>
+                                <span><Typewriter text="View work experience" /></span>
                                 <span>contact</span>
                                 <span><Typewriter text="Get in touch" /></span>
                                 <span>theme</span>
@@ -291,8 +293,7 @@ export const Terminal = () => {
                                 <span><Typewriter text="Show this help message" /></span>
                                 <span>go &lt;num&gt;</span>
                                 <span><Typewriter text="Go to project number" /></span>
-                                <span>exp</span>
-                                <span><Typewriter text="View work experience" /></span>
+
                             </div>
                         </div>
                     );
@@ -301,8 +302,11 @@ export const Terminal = () => {
                     output = (
                         <MultiLineTypewriter
                             lines={[
-                                "Hi, I'm a Full Stack Developer passionate about building minimalist and functional web applications.",
-                                "I love working with React, Next.js, Node.js, and modern web technologies."
+                                "I'm a passionate full-stack developer with over 4 years of experience navigating the ever-evolving landscape of web development.",
+                                "My journey began with a deep dive into the MERN stack, where I honed my skills in MongoDB, Express.js, React, and Node.js, allowing me to build robust and scalable web applications.",
+                                "But my passion for learning doesn't stop there.",
+                                "I thrive on the challenge of picking up new frameworks and languages, and I'm comfortable working on both the front-end and back-end, as well as venturing into the world of mobile app development.",
+                                "This versatility and adaptability empower me to approach any project with confidence and enthusiasm."
                             ]}
                         />
                     );

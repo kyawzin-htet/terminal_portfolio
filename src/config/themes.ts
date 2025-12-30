@@ -202,7 +202,7 @@ export const themes: Record<ThemeName, TerminalTheme> = {
     },
     'glass': {
         name: 'glass',
-        displayName: 'VisionOS Glass',
+        displayName: 'Glass',
         colors: {
             background: 'rgba(0, 0, 0, 0.3)', // Darker, more transparent feel
             foreground: '#ffffff',
