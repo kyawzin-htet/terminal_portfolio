@@ -64,14 +64,14 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
                 ${isMaximized ? "fixed inset-0 z-50 rounded-none transform-none" : "relative mx-auto"}
                 ${theme.name === 'glass'
                     ? "backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] border border-white/20 hover:backdrop-blur-3xl hover:border-white/30 hover:shadow-[0_8px_40px_0_rgba(31,38,135,0.45)]"
-                    : "rounded-lg shadow-xl"
+                    : "rounded-lg shadow-xl border backdrop-blur-none"
                 }
             `}
             style={{
                 position: isMaximized ? "fixed" : "relative",
                 backgroundColor: theme.colors.background,
                 borderColor: theme.name === 'glass' ? undefined : theme.colors.border,
-                boxShadow: theme.name === 'glass' ? 'inset 0 0 0 1px rgba(255, 255, 255, 0.1)' : undefined, // Inner glow
+                boxShadow: theme.name === 'glass' ? 'inset 0 0 0 1px rgba(255, 255, 255, 0.1)' : `0 25px 50px -12px rgba(0, 0, 0, 0.25)`,
             }}
         >
             {/* Title Bar */}

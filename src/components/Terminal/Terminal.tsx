@@ -299,6 +299,13 @@ export const Terminal = () => {
                                 <span><Typewriter text="Go to project number" /></span>
 
                             </div>
+                            <p className="text-cyan-400 mt-2"><Typewriter text="✨ Features:" /></p>
+                            <div className="text-gray-300 text-sm ml-2">
+                                <p>• Tab autocomplete - Press Tab to auto-fill commands</p>
+                                <p>• Draggable window - Drag the terminal anywhere on screen</p>
+                                <p>• Multiple themes - Customize your terminal appearance</p>
+                                <p>• Resizable window - Maximize, minimize, or restore</p>
+                            </div>
                         </div>
                     );
                     break;

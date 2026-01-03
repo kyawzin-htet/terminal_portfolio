@@ -34,7 +34,7 @@ export const themes: Record<ThemeName, TerminalTheme> = {
         name: 'dark',
         displayName: 'Dark',
         colors: {
-            background: '#0f172a',
+            background: '#000000',
             foreground: '#e2e8f0',
             border: '#1e293b',
             titleBar: '#1e293b',
@@ -44,7 +44,7 @@ export const themes: Record<ThemeName, TerminalTheme> = {
             output: '#06b6d4',
             accent: '#22c55e',
             scrollbarThumb: '#334155',
-            scrollbarTrack: '#0f172a',
+            scrollbarTrack: '#000000',
         },
     },
     'light': {
