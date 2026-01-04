@@ -20,6 +20,9 @@ export const ProjectList: React.FC<ProjectListProps> = ({ data, theme }) => {
         result.push([{ text: "// ACCESSING PROJECT_DIRECTORY.LIST...", className: "text-gray-500 text-xs md:text-sm" }]);
         result.push([{ text: "" }]); // Empty line
 
+        result.push([{ text: "" }]); // Empty line
+
+
         // Professional Summary Preamble
         result.push([
             { text: "> SYSTEM STATUS: ", className: "text-green-400 font-bold" },

@@ -96,12 +96,21 @@ export const Terminal = () => {
                 id: "init",
                 command: "welcome",
                 output: (
-                    <MultiLineTypewriter
-                        lines={[
-                            "Welcome to kyawzinhtet-portfolio. v1.0.0",
-                            "Type 'help' to see available commands."
-                        ]}
-                    />
+                    <div className="flex flex-col gap-2">
+                        <MultiLineTypewriter
+                            lines={[
+                                "Welcome to kyawzinhtet-portfolio. v1.0.0",
+                                "Type 'help' to see available commands."
+                            ]}
+                        />
+                        <p className="text-cyan-400 mt-2"><Typewriter text="✨ Features:" /></p>
+                        <div className="text-gray-300 text-sm ml-2">
+                            <p>• Tab autocomplete - Press Tab to auto-fill commands</p>
+                            <p>• Draggable window - Drag the terminal anywhere on screen</p>
+                            <p>• Multiple themes - Customize your terminal appearance</p>
+                            <p>• Resizable window - Maximize, minimize, or restore</p>
+                        </div>
+                    </div>
                 ),
             },
         ]);
@@ -297,14 +306,8 @@ export const Terminal = () => {
                                 <span><Typewriter text="Show this help message" /></span>
                                 <span>go &lt;num&gt;</span>
                                 <span><Typewriter text="Go to project number" /></span>
-
-                            </div>
-                            <p className="text-cyan-400 mt-2"><Typewriter text="✨ Features:" /></p>
-                            <div className="text-gray-300 text-sm ml-2">
-                                <p>• Tab autocomplete - Press Tab to auto-fill commands</p>
-                                <p>• Draggable window - Drag the terminal anywhere on screen</p>
-                                <p>• Multiple themes - Customize your terminal appearance</p>
-                                <p>• Resizable window - Maximize, minimize, or restore</p>
+                                <span>sudo</span>
+                                <span><Typewriter text="Try it out yourself" /></span>
                             </div>
                         </div>
                     );
@@ -375,6 +378,10 @@ export const Terminal = () => {
                         />
                     );
                     break;
+                case "sudo":
+                    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+                    output = <Typewriter text="Access granted..." />;
+                    break;
                 default:
                     output = (
                         <div>
@@ -427,7 +434,7 @@ export const Terminal = () => {
                 onClear={() => setHistory([])}
                 availableCommands={[
                     "help", "about", "projects", "contact", "theme", "exp", "experience",
-                    "clear", "maximize", "minimize", "restore", "go",
+                    "clear", "maximize", "minimize", "restore", "go", "sudo",
                     // Add all theme commands for autocomplete
                     ...getAllThemeNames().map(name => `theme ${name}`)
                 ]}
