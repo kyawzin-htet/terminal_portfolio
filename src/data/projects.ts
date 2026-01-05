@@ -9,7 +9,7 @@ export interface ProjectItem {
 
 export const projectsData: ProjectItem[] = [
     {
-        id: "portfolio",
+        id: "terminal-portfolio",
         name: "Terminal Portfolio",
         description: [
             "A terminal-based portfolio website built with Next.js and Tailwind CSS.",
@@ -19,6 +19,18 @@ export const projectsData: ProjectItem[] = [
         technologies: ["Next.js", "React", "TailwindCSS", "Framer Motion", "TypeScript"],
         url: "https://kyawzinhtet-terminal-portfolio.vercel.app",
         repo: "https://github.com/kyawzin-htet/terminal_portfolio"
+    },
+    {
+        id: "graphical-portfolio",
+        name: "Graphical Portfolio",
+        description: [
+            "A graphical portfolio website built with React.js, styled-components, locomotive-scroll and framer-motion",
+            "Features a fully functional graphical interface.",
+            "Implements modern aesthetics with modern performance."
+        ],
+        technologies: ["React", "styled-components", "locomotive-scroll", "framer-motion"],
+        url: "https://kyawzinhtet.vercel.app",
+        repo: "https://github.com/kyawzin-htet/react-portfolio"
     },
     {
         id: "weather-app",
