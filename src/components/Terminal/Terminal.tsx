@@ -306,6 +306,8 @@ export const Terminal = () => {
                                 <span><Typewriter text="Show this help message" /></span>
                                 <span>go &lt;num&gt;</span>
                                 <span><Typewriter text="Go to project number" /></span>
+                                <span>gui</span>
+                                <span><Typewriter text="Graphical Interface Portfolio" /></span>
                                 <span>sudo</span>
                                 <span><Typewriter text="Try it out yourself" /></span>
                             </div>
@@ -382,6 +384,10 @@ export const Terminal = () => {
                     window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
                     output = <Typewriter text="Access granted..." />;
                     break;
+                case "gui":
+                    window.open('https://kyawzinhtet.vercel.app', '_blank');
+                    output = <Typewriter text="Opening graphical portfolio..." />;
+                    break;
                 default:
                     output = (
                         <div>
@@ -434,7 +440,8 @@ export const Terminal = () => {
                 onClear={() => setHistory([])}
                 availableCommands={[
                     "help", "about", "projects", "contact", "theme", "exp", "experience",
-                    "clear", "maximize", "minimize", "restore", "go", "sudo",
+
+                    "clear", "maximize", "minimize", "restore", "go", "sudo", "gui",
                     // Add all theme commands for autocomplete
                     ...getAllThemeNames().map(name => `theme ${name}`)
                 ]}
