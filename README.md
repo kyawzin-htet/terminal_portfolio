@@ -1,8 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 👨‍💻 Terminal Portfolio
 
-## Getting Started
+A developer portfolio with a retro, interactive command-line interface. Built for developers who love the terminal experience, this portfolio lets visitors "hack" their way through projects, experience, and contact forms.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat&logo=next.js)
+![React](https://img.shields.io/badge/React-19-blue?style=flat&logo=react)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=flat&logo=tailwind-css)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat&logo=typescript)
+
+## ✨ Features
+
+- **Interactive Command Line**: Type commands to navigate through the portfolio, just like a real terminal.
+- **Tab Autocomplete**: Press `Tab` to auto-complete commands.
+- **Dynamic Themes**: Change the terminal's theme on the fly using the `theme <name>` command.
+- **Interactive Contact Form**: Send messages directly from the terminal prompt.
+- **Window Management**: Draggable, resizable (maximize/minimize/restore) terminal window.
+- **Session Restoration**: Remembers your command history across page reloads.
+- **Easter Eggs**: Try out secret commands like `sudo`.
+- **Fully Responsive**: Optimizes automatically for both desktop and mobile views.
+
+## 🛠 Tech Stack
+
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Library**: [React 19](https://react.dev/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Email Delivery**: [Nodemailer](https://nodemailer.com/)
+- **Language**: TypeScript
+
+## 🚀 Getting Started
+
+First, clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/kyawzin-htet/terminal_portfolio.git
+cd terminal_portfolio
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +50,41 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 💻 Available Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Once inside the terminal portfolio, you can use the following commands:
 
-## Learn More
+- `help` - Show available commands
+- `about` - Who am I?
+- `projects` - View my work
+- `go <num>` - Go directly to a project by number
+- `exp` (or `experience`) - View work experience
+- `contact` - Start the interactive contact form to get in touch
+- `theme` - List all available terminal themes
+- `theme <name>` - Switch to a specific theme
+- `clear` - Clear terminal history
+- `maximize` - Maximize terminal window
+- `minimize` - Minimize terminal window
+- `gui` - Open the graphical version of the portfolio
+- `sudo` - Try it out yourself
 
-To learn more about Next.js, take a look at the following resources:
+## 🗂 Folder Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+src/
+├── app/                  # Next.js App Router pages and global CSS
+├── components/           # Reusable UI components
+│   └── Terminal/         # Core terminal logic, output handling, and commands
+├── config/               # Themes definitions and ASCII art configurations
+├── context/              # React Context (e.g., Theme Context)
+├── data/                 # Static data for projects and experience details
+└── hooks/                # Custom React Hooks
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📝 License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
